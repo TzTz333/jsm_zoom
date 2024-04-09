@@ -8,6 +8,9 @@ const apiSecret = process.env.STREAM_SECRET_KEY;
 
 export const tokenProvider = async () => {
     const user = await currentUser();
+
+    console.log("Checking if currentUser() function returns a user...");
+    console.log("User:", user);
   
     if (!user) throw new Error('User is not logged in');
     if (!apiKey) throw new Error('Stream API key secret is missing');
@@ -15,15 +18,21 @@ export const tokenProvider = async () => {
 
     const client = new StreamClient(apiKey, apiSecret);
 
+
     //一小时后过期
     const exp = Math.round(new Date().getTime() / 1000) + 60 * 60;
 
     // 60秒前签发
     const issued = Math.floor(Date.now() / 1000) - 60;
 
+    console.log(`User ID: ${user.id}`);
+    console.log(`Expiration time: ${exp}`);
+    console.log(`Issued time: ${issued}`);
+
+    
     // 生成token的时候, 传入用户的id, 过期时间, 签发时间
     const token = client.createToken(user.id, exp, issued);
-
+  
     return token;
 
 }
