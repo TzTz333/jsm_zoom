@@ -9,6 +9,7 @@ import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useToast } from "@/components/ui/use-toast"
 import { Textarea } from './ui/textarea';
 import ReactDatePicker from 'react-datepicker'
+import { Input } from './ui/input';
 
 
 
@@ -85,9 +86,9 @@ const MeetingTypeList = () => {
         />
         <HomeCard 
             img = '/icons/recordings.svg'
-            title = '查看记录'
-            description = '查看以前的会议记录'
-            handleClick = {() => setMeetingState('isJoiningMeeting')}
+            title = '查看录音'
+            description = '查看以前的会议录音'
+            handleClick = {() => router.push('/recordings')}
             className = 'bg-purple-1'
         />
         <HomeCard 
@@ -146,9 +147,29 @@ const MeetingTypeList = () => {
             isOpen={MeetingState === 'isInstantMeeting'}
             onClose={() => setMeetingState(undefined)}
             title="开始一个即时会议"
+            className='text-center'
             buttonText="开始会议"
             handleClick={createMeeting}
         />
+
+
+        <MeetingModal 
+            isOpen={MeetingState === 'isJoiningMeeting'}
+            onClose={() => setMeetingState(undefined)}
+            title="导入会议链接"
+            className='text-center'
+            buttonText="加入会议"
+            handleClick={() => router.push(values.link)}
+        >
+            <Input
+                placeholder='输入会议链接'
+                className='border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0'
+                onChange={(e) => setValues({...values, link:e.target.value})}
+            />
+        </MeetingModal>
+
+
+
 
     </section>
   )

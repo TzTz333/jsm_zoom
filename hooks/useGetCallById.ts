@@ -1,7 +1,7 @@
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk"
 import { useEffect, useState } from "react"
 
-export const useGetCallByld = (id: string | string[]) => {
+export const useGetCallById = (id: string | string[]) => {
     const [call,setCall] = useState<Call>()
     const [isCallLoading, setisCallLoading] = useState(true)
 

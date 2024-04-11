@@ -86,9 +86,9 @@ const CallList = ({type}:{type:'ended' | 'upcoming' | 'recordings'}) => {
             }
 
             title={
-              (meeting as Call).state?.custom?.description.substring(0, 26) || 
-              meeting.filename.substring(0,20) ||
-              'No Description'
+              (meeting as Call).state?.custom?.description?.substring(0, 26) || 
+              meeting?.filename?.substring(0,20) ||
+              '个人会议'
             }
 
             date={

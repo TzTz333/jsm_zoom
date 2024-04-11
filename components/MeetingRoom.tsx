@@ -1,3 +1,4 @@
+'use client'
 import { cn } from '@/lib/utils'
 import { CallControls, CallParticipantListing, CallParticipantsList, CallStatsButton, CallingState, PaginatedGridLayout, SpeakerLayout, useCallStateHooks } from '@stream-io/video-react-sdk'
 import React, { useState } from 'react'
@@ -12,6 +13,7 @@ import {
 import { LayoutList, Loader, User } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import EndCallButton from './EndCallButton'
+import { useRouter } from "next/navigation";
 
 
 
@@ -27,6 +29,8 @@ const MeetingRoom = () => {
   //获取当前的通话状态
   const {useCallCallingState} = useCallStateHooks();
   const callingState = useCallCallingState();
+
+  const router = useRouter();
 
   if(callingState !== CallingState.JOINED) return <Loader />
 
@@ -61,7 +65,7 @@ const MeetingRoom = () => {
       </div>
 
       <div className='fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap'>
-        <CallControls />
+        <CallControls onLeave={() => router.push('/')}/>
 
         <DropdownMenu>
 
