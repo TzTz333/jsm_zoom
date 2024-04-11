@@ -36,7 +36,6 @@ const MeetingTypeList = () => {
                 return;
             }
 
-
             const id = crypto.randomUUID();
             const call = client.call('default',id);
 
@@ -65,6 +64,8 @@ const MeetingTypeList = () => {
             toast({title: "创建会议失败",})
         }
     }
+
+    const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`
 
   return (
     <section className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4'>
@@ -123,7 +124,6 @@ const MeetingTypeList = () => {
                         dateFormat={'MMMM d, yyyy h:mm aa'}
                         className='w-full rounded bg-dark-3 p-2 focus:outline-none'
                         />
-
                 </div>
             </MeetingModal>
         ) : (
@@ -133,8 +133,8 @@ const MeetingTypeList = () => {
                 title="开始一个即时会议"
                 className='text-center'
                 handleClick={() => {
-                    // navigator.clipboard.writeText(meetingLink);
-                    // toast({title: '会议链接已复制到剪贴板'})
+                    navigator.clipboard.writeText(meetingLink);
+                    toast({title: '会议链接已复制到剪贴板'})
                 }}
                 image='/icons/checked.svg'
                 buttonIcon='/icons/copy.svg'

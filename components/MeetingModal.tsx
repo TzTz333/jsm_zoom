@@ -52,14 +52,17 @@ const MeetingModal = ({
                     {title}
                 </h1>
                 {children}
+
                 <Button className="bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0" 
                 onClick={handleClick} >
                     {buttonIcon && (
                         <Image src={buttonIcon} alt='button icon' width={13} height={13} />
                     )} &nbsp;
-                    {buttonText || "会议安排"}
+                    {buttonText || "创建会议日程"}
                 </Button>
+
             </div>
+            
         </DialogContent>
     </Dialog>
 
